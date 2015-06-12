@@ -2,6 +2,6 @@ language: node_js
 node_js:
   - "node"
   - "iojs"
-before_install: npm install -g grunt-cli
+before_install: npm install -g grunt-cli codeclimate-test-reporter
 after_script:
-  - grunt coveralls:all
+  - CODECLIMATE_REPO_TOKEN=a3eed3938bd6085fefcd43032775db98a3a457734c0017eac4a9445d183db343 codeclimate < reports/coverage/lcov.info
