@@ -1,0 +1,9 @@
+{
+	"predef" : [
+		"require",
+		"module",
+		"console",
+		"setInterval",
+		"process"
+	]
+}
