@@ -37,29 +37,13 @@ module.exports = function(grunt) {
 				},
 				src: src.js
 			}
-		},
-		coveralls : {
-			options : {
-				src : 'reports/coverage/lcov.info'
-			},
-			all : {
-				src : 'reports/coverage/lcov.info'
-			}
-		},
-		codacy: {
-			options: {},
-			files: {
-			  'coverage': src.js
-			}
-		  }
+		}
 	});
 
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-jscs');
 	grunt.loadNpmTasks('grunt-jasmine-node');
 	grunt.loadNpmTasks('grunt-jasmine-node-coverage');
-	grunt.loadNpmTasks('grunt-coveralls');
-	grunt.loadNpmTasks('grunt-codacy');
 
 	grunt.registerTask('test', ['jshint', 'jscs', 'jasmine_node']);
 };
