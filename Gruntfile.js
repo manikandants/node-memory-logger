@@ -39,7 +39,12 @@ module.exports = function(grunt) {
 			}
 		},
 		coveralls : {
-			all : 'reports/coverage/lcov.info'
+			options : {
+				src : 'reports/coverage/lcov.info'
+			},
+			all : {
+				src : 'reports/coverage/lcov.info'
+			}
 		}
 	});
 

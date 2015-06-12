@@ -4,7 +4,8 @@
   "description": "Logs Node.js memory usage",
   "main": "index.js",
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt test",
+	"ci" : "grunt test && grunt coveralls"
   },
   "repository": {
     "type": "git",
