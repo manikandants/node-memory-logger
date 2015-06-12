@@ -3,7 +3,9 @@
 		"require",
 		"module",
 		"console",
+		"process",
 		"setInterval",
-		"process"
+		"clearInterval",
+		"setTimeout"
 	]
 }

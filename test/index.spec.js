@@ -8,3 +8,6 @@ var memoryLogger = MemoryLogger({
 	interval : 10
 });
 memoryLogger.start();
+setTimeout(function() {
+	memoryLogger.stop();
+}, 20000);

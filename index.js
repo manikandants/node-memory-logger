@@ -1,6 +1,16 @@
 var os = require('os');
 var mongo = require('mongoskin');
 
+var logMemory = function() {
+	var now = new Date();
+	this._db.insert({
+		timestamp : now,
+		freeMemory : os.freemem(),
+		usedMemory : process.memoryUsage()
+	}, function() {
+	});
+};
+
 var MemoryLogger = module.exports = function(opts) {
 	opts = opts ? opts : {};
 	if (!(this instanceof MemoryLogger)) {
@@ -17,10 +27,14 @@ var MemoryLogger = module.exports = function(opts) {
 };
 
 MemoryLogger.prototype.start = function() {
-	if (!this._callback) {
-		this._callback = setInterval(logMemory.bind(this), this._interval * 1000);
+	if (!this._timer) {
+		this._timer = setInterval(logMemory.bind(this), this._interval * 1000);
 		process.nextTick(logMemory.bind(this));
 	}
+};
+
+MemoryLogger.prototype.stop = function() {
+	clearInterval(this._timer);
 };
 
 MemoryLogger.prototype.mongo = function(db) {
@@ -37,12 +51,4 @@ MemoryLogger.prototype.database = function(url, collection, options) {
 
 	this._db = mongo.db(url, options).collection(collection);
 	return this;
-};
-
-var logMemory = function() {
-	this._db.insert({
-		freeMemory : os.freemem(),
-		usedMemory : process.memoryUsage()
-	}, function(error, savedMem) {
-	});
 };
