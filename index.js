@@ -4,7 +4,7 @@ var mongo = require('mongoskin');
 var logMemory = function() {
 	var now = new Date();
 	this._db.insert({
-		timestamp : now,
+		timestamp : now.getTime(),
 		freeMemory : os.freemem(),
 		usedMemory : process.memoryUsage()
 	}, function() {
@@ -20,7 +20,7 @@ var MemoryLogger = module.exports = function(opts) {
 	if (opts.db) {
 		this.database(opts.db.address, opts.db.collection, opts.db.options);
 	}else if (opts.mongo) {
-		this._db = mongo.db;
+		this.mongo(opts.mongo);
 	}else {
 		this.database('mongodb://localhost:27017/memory');
 	}
@@ -43,6 +43,7 @@ MemoryLogger.prototype.mongo = function(db) {
 };
 
 MemoryLogger.prototype.database = function(url, collection, options) {
+	url = url || 'mongodb://localhost:27017/memory';
 	collection = collection || 'memoryLog';
 	options = options || {w: 0};
 	if (!url.match(/^mongodb:\/\/.*/)) {
