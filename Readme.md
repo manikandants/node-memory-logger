@@ -11,6 +11,8 @@ Memory Logger
 
 ## Installation
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/manikandants/node-memory-logger.svg)](https://greenkeeper.io/)
+
 ```bash
 $ npm install memory-logger
 ```
